@@ -31,6 +31,22 @@
 // Ex.:
 //   buildWordChain(['zoo', 'sour', 'racket', 'octos']);
 //   => ['zoo', 'octos', 'sour', 'racket']
-function buildWordChain(words) {}
+function buildWordChain(words) {
+  const sequence = [];
+  if (words.length > 0) sequence.push(words.shift());
+
+  while (words.length > 0) {
+    // Do until the original array has no words left
+    const lastWordChar = sequence[sequence.length - 1].at(-1); // get last char of last word in the sequence
+    const nextWord = words.filter((word) => word.at(0) === lastWordChar)[0]; // find the next word that starts with the last char of the last word in the sequence
+    if (nextWord) {
+      sequence.push(nextWord); // If another word was found add it to the sequence
+      words.splice(words.indexOf(nextWord), 1); // Remove the found word from the original array
+    } else {
+      break; // Break out of while loop since another word could not be found that also fit the criteria
+    }
+  }
+  return sequence;
+}
 
 export { buildWordChain };
