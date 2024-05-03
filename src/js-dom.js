@@ -8,7 +8,11 @@
 // update and say "Log out". If a user clicks on the button again, its text
 // should switch from "Log Out" to "Log In".
 
-/// TODO: replace this with your code
+const toggleButton = (e) => {
+  e.target.innerText = e.target.innerText === "Log in" ? "Log out" : "Log in";
+};
+
+document.querySelector("#auth").addEventListener("click", toggleButton);
 
 // Send an alert
 //
@@ -17,7 +21,16 @@
 // A user should be able to enter what they want the alert to say in the
 // text box. Then, they can submit the form to trigger the alert.
 
-/// TODO: replace this with your code
+const sendAlert = (e) => {
+  e.preventDefault(); // Prevent page reload
+  const alertMessage = document.querySelector("#alert-message");
+  alert(`${alertMessage.value}`);
+  alertMessage.value = ""; // Reset text field
+};
+
+document
+  .querySelector("#send-alert button")
+  .addEventListener("click", sendAlert);
 
 // Add an item
 //
@@ -34,7 +47,16 @@
 //     <li>Item</li>  <!-- This was added after double-clicking -->
 //   </ol>
 
-/// TODO: replace this with your code
+const doubleClickBtn = document.querySelector("#item-adder");
+const doubleClickList = document.querySelector("#list");
+
+const addItem = () => {
+  const newItem = document.createElement("li");
+  newItem.innerText = "Item";
+  doubleClickList.appendChild(newItem);
+};
+
+doubleClickBtn.addEventListener("dblclick", addItem);
 
 // Change colors
 //
@@ -45,7 +67,17 @@
 // Clicking on "Turn Stuff Red" should make text red and clicking on "Turn
 // Stuff Blue" should make text blue.
 
-/// TODO: replace this with your code
+const blueBtn = document.querySelector("#blue");
+const redBtn = document.querySelector("#red");
+
+const updateColor = (e) => {
+  const elementsToChange = document.querySelectorAll(".changes-colors");
+  const color = e.target.id;
+  elementsToChange.forEach((element) => (element.style.color = color));
+};
+
+blueBtn.addEventListener("click", updateColor);
+redBtn.addEventListener("click", updateColor);
 
 // Calculate factorial
 //
@@ -62,7 +94,19 @@
 //   - calls your function that calculates a factorial
 //   - puts the result of the function inside the "result" span
 
-/// TODO: replace this with your code
+const factNum = document.querySelector("#factorial-input");
+const calcFactorBtn = document.querySelector("#factorial-calculator button");
+const result = document.querySelector("#result");
+
+const calcFactorial = (e) => {
+  e.preventDefault(); // Prevent page reload
+  const num = factNum.value;
+  const arrNums = Array.from({ length: num }, (_, index) => num - index); // Fill array with the given number and nums less than it
+  const factorial = arrNums.reduce((accum, currVal) => accum * currVal); // Calculate factorial, using first num as initial_value
+  result.innerText = factorial;
+};
+
+calcFactorBtn.addEventListener("click", calcFactorial);
 
 // Validate a form
 //
@@ -79,4 +123,20 @@
 // the feedback text to say "The word must be at least 4 characters long." and
 // change the color of the text to red..
 
-/// TODO: replace this with your code
+const word = document.querySelector("#word");
+const subBtn = document.querySelector("#recommend-word button");
+const formFeedback = document.querySelector(".form-feedback");
+
+const checkWordLength = (e) => {
+  e.preventDefault();
+  // As per the initial part of the instructions, will check for 4 or more characters long word
+  if (word.value.length >= 4) {
+    formFeedback.innerText = "Thanks for your submission!";
+    formFeedback.style.color = "green";
+  } else {
+    formFeedback.innerText = "The word must be at least 4 characters long.";
+    formFeedback.style.color = "red";
+  }
+};
+
+subBtn.addEventListener("click", checkWordLength);
