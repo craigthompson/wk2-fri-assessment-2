@@ -1,0 +1,35 @@
+/* *************************************************** */
+/*                      Colors                         */
+/* *************************************************** */
+:root {
+  --white: white;
+  --black: black;
+}
+
+/* *************************************************** */
+/*                     Elements                        */
+/* *************************************************** */
+body {
+  font-family: sans-serif;
+  color: var(--white);
+  background-color: var(--black);
+}
+
+table,
+th,
+td {
+  border: 1px solid var(--white);
+}
+
+table {
+  margin-top: 50px;
+}
+
+th,
+td {
+  padding: 5px;
+}
+
+.character-div {
+  margin: 1em auto;
+}
