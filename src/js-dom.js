@@ -71,13 +71,17 @@ const blueBtn = document.querySelector("#blue");
 const redBtn = document.querySelector("#red");
 
 const updateColor = (e) => {
-  const elementsToChange = document.querySelectorAll(".changes-colors");
-  const color = e.target.id;
-  elementsToChange.forEach((element) => (element.style.color = color));
+  // Only run for clicks on the buttons
+  if (e.target.tagName == "BUTTON") {
+    const elementsToChange = document.querySelectorAll(".changes-colors");
+    const color = e.target.id;
+    elementsToChange.forEach((element) => (element.style.color = color));
+  }
 };
 
-blueBtn.addEventListener("click", updateColor);
-redBtn.addEventListener("click", updateColor);
+// blueBtn.addEventListener("click", updateColor);
+// redBtn.addEventListener("click", updateColor);
+document.addEventListener("click", updateColor); // Using event delegation
 
 // Calculate factorial
 //
